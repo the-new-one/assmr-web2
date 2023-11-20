@@ -1,10 +1,10 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 import { DashBoardService } from "../../services/dashboard-service";
 
-export const AdminDashboard = () => {
+export const OnGoingTransactions = () => {
     const dashBoardService = new DashBoardService();
     useEffect(() => {
-        getDashBoardRecrods()
+        getAllOnGoingTransactions()
             .then((response: any) => {
                 console.log(response)
             })
@@ -12,8 +12,10 @@ export const AdminDashboard = () => {
                 console.log(err);
             });
     }, []);
-    function getDashBoardRecrods() {
-        return dashBoardService.getAllDashboardRecrods();
+    function getAllOnGoingTransactions() {
+        return dashBoardService.getAllOnGoingTransactions('on-going transaction');
     }
-    return <p>admin dash</p>
+    return <section>
+        on going
+    </section>
 }

@@ -10,12 +10,12 @@ export const AdminNavigation = () => {
         },
         {
             key: '2',
-            href: '#on-going-transactions',
+            href: 'on-going-transactions',
             title: 'On going transactions'
         },
         {
             key: '3',
-            href: '#successfull-assumed',
+            href: 'successfull-assumed',
             title: 'Successfully Assumed property'
         },
         {
@@ -24,10 +24,14 @@ export const AdminNavigation = () => {
             title: 'Deleted property'
         }
     ]
-    return <section>
+    return <div className="app-container">
+        <section className="left-nav">
         <Anchor
             items={items}
         />
+        </section>
+        <section>
         <Outlet />
-    </section>
+        </section>
+    </div>
 }
