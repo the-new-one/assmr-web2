@@ -1,5 +1,5 @@
 import { Anchor } from 'antd';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 export const AdminNavigation = () => {
     const items = [
@@ -10,24 +10,43 @@ export const AdminNavigation = () => {
         },
         {
             key: '2',
-            href: '#on-going-transactions',
-            title: 'On going transactions'
+            href: 'on-going-transactions',
+            title: 'On Going Transactions'
         },
         {
             key: '3',
-            href: '#successfull-assumed',
-            title: 'Successfully Assumed property'
+            href: 'successfull-assumed',
+            title: 'Successfully Assumed Property'
         },
         {
             key: '4',
             href: 'dropped',
-            title: 'Deleted property'
-        }
+            title: 'Deleted Property'
+        },
+        {
+            key: '5',
+            href: 'subscriptions',
+            title: 'User Subscriptions'
+        },
+        {
+            key: '6',
+            href: 'feedbacks',
+            title: 'User Feedbacks'
+        },
+        {
+            key: '7',
+            href: 'ratings',
+            title: 'User Ratings'
+        },
     ]
-    return <section>
+    return <div className="app-container">
+        <section className="left-nav">
         <Anchor
             items={items}
         />
-        <Outlet />
-    </section>
+        </section>
+        <section style={{width: '100%', marginLeft: '250px'}}>
+            <Outlet />
+        </section>
+    </div>
 }

@@ -8,7 +8,10 @@
   flex-direction: row;
 }
 .left-nav {
-  width: 300px;
+  width: 250px;
   height: 100vh;
-  /* background-color: #DDD; */
+  background-color: #DDD;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 }

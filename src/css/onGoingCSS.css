@@ -1,0 +1,19 @@
+.card {
+    border: 1px solid #DDD;
+    width: 30%;
+    padding: 10px;
+    margin: 5px;
+    flex-wrap: wrap;
+}
+.card-body {
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.property-info {
+    cursor: pointer;
+    padding: 5px;
+}
+.property-info:hover {
+    border: 1px solid #DDD;
+}
