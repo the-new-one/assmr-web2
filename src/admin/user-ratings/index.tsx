@@ -1,48 +1,85 @@
-import {useState} from 'react';
+/* eslint-disable jsx-a11y/alt-text */
+import {useEffect, useState} from 'react';
 import { formatDate, toUpperCase } from '../../utils/utilsFunct';
-import { APP_COLOR, GOLD_COLOR } from '../../constants/appConstants';
+import { SUCCESS_COLOR } from '../../constants/appConstants';
+import { DashBoardService } from '../../services/dashboard-service';
+import {Rating} from 'react-simple-star-rating';
 
 export const UserRatings = () => {
+    const adminService = new DashBoardService();
     const [ratingList, setRatingList] = useState<any>([]);
+    const [activeView, setActiveView] = useState<string>('Show company ratings');
+
+    useEffect(() => {
+        fetchRatings()
+            .then((response) => {
+                const {data} = response;
+                setRatingList(data.data);
+            })
+            .catch((err) => {
+                alert(err.message);
+                console.log(err)
+            });
+    }, [activeView]);
+
+    function fetchRatings() {
+        return adminService.getAllRatings(activeView);
+    }
+    function onChangeActiveView(param: any) {
+        setActiveView(param.target.value);
+    }
     return <div>
         <div style={{width: '500px', border: '1px solid #DDD', margin: '0 auto', textAlign: 'center', textTransform: 'capitalize', padding: '10px', marginTop: 10}}>user ratings</div>
+        <select className="dropdown" onChange={onChangeActiveView} style={{margin: '10px 0', zIndex: 100, cursor: 'pointer'}}>
+            <option>Show company ratings</option>
+            <option>Show app ratings</option>
+        </select>
         {
             ratingList && (
                 <div style={{width: '100%', display: 'flex', justifyContent: 'space-evenly', marginTop: 10, padding: 5}}>
                     {
-                        ratingList.map((value: any, index: any) => {
-                            return <div className="card" key={index}>
-                                {/* <div className="card-header" style={{textAlign: 'center'}}>
-                                    <h4>On Going Transactions Between</h4>
-                                </div> */}
-                                <div className="card-body">
-                                    <div style={{width: '100%', textAlign: 'center', flexWrap: 'wrap'}}>
-                                        <img src={require('../../assets/img/user.png')}
-                                            style={{width: '50px', height: '50px'}}
-                                        />
-                                        <div style={{textAlign: 'center'}}>
-                                            <label htmlFor="owner-lastname">{toUpperCase(value.user_lastname+', ')}</label>
-                                            <label htmlFor="owner-firstname">{toUpperCase(value.user_firstname+' ')}</label>
-                                            <label htmlFor="owner-middlename">{toUpperCase(value.user_middlename[0]+'.')}</label>
+                        activeView === 'Show company ratings' ?
+                        ratingList.map((record: any) => {
+                            return <div key={record.id} className="card" style={{width: '50%', position: 'relative', zIndex: 1}}>
+                                    <div >
+                                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignSelf: 'center', padding: 5}}>
+                                        <img src={require('../../assets/img/user.png')} style={{width: 100, height: 100}} />
+                                        </div>
+                                        <hr />
+                                        <div style={{position: 'absolute', right: 0}}>
+                                            <button className="btn btn-view-ratings">View</button>
+                                        </div>
+                                        <p style={{margin: 5}}>Company Name: {record.company_name}</p>
+                                        <p style={{margin: 5}}>Branch: {record.company_branch}</p>
+                                        <p style={{margin: 5}}>Representative: {record.company_representative}</p>
+                                        <p style={{margin: 5}}>Website: {record.website}</p>
+                                        <p style={{margin: 5}}>Establish Date: {formatDate(record.company_establish_date)}</p>
+                                        <div style={{backgroundColor: SUCCESS_COLOR, borderRadius: 10, padding: 10}}>
+                                        <p style={{textAlign: 'center'}}>There are {record.totalCommenter} people rate this!</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{padding: '10px'}}>
-                                    <label>{toUpperCase('subscription information')}</label>
-                                    <hr />
-                                    <p style={{marginTop: 5}}>User type: {value.userSub_userType}</p>
-                                    <p style={{marginTop: 5}}>Email: {value.user_email}</p>
-                                    <p style={{marginTop: 5}}>Max property to post: {value.userSub_maxNoToPost}</p>
-                                    <p style={{marginTop: 5}}>Subscription date: {formatDate(value.userSub_subscription_date)}</p>
-                                    <p style={{marginTop: 5}}>Subscription expiry date: {formatDate(value.userSub_subscription_expiry)}</p>
-                                    <p style={{marginTop: 5}}>Address: {value.user_barangay}, {value.user_province}, {value.user_municipality}</p>
+                        })
+                        :
+                        ratingList.length && ratingList.map((record: any) => {
+                            return <div key={record.id} className="card" style={{width: '50%', position: 'relative', zIndex: 1}}>
+                                    <div >
+                                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignSelf: 'center', padding: 5}}>
+                                        <img src={require('../../assets/img/user.png')} style={{width: 100, height: 100}} />
+                                        </div>
+                                        <hr />
+                                        {/* <div style={{position: 'absolute', right: 0}}>
+                                            <button className="btn btn-view-ratings">View</button>
+                                        </div> */}
+                                        <p style={{margin: 5}}>Name: {toUpperCase(`${record?.lastname}, ${record?.firstname} ${record?.middlename?.length ? record?.middlename[0]: ''}.`)}</p>
+                                        <p style={{margin: 5}}>Date: {formatDate(record.ratingDate)}</p>
+                                        <p style={{margin: 5}}>Website: {record.website}</p>
+                                        <p style={{textAlign: 'center'}}>"{record.comment}"</p>
+                                        <div style={{display: 'flex', justifyContent: 'center'}} >
+                                        <Rating initialValue={record.ratingStar} />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style={{background: value.userSub_isSubscribed ? GOLD_COLOR : APP_COLOR, borderRadius: 100, padding: 5, marginTop: 10}}>
-                                    {
-                                        value.userSub_isSubscribed === 1 ? 'Subscriber' : 'No subscribed'
-                                    }
-                                </div>
-                            </div>
                         })
                     }
                 </div>

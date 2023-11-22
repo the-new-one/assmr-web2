@@ -17,3 +17,19 @@
 .property-info:hover {
     border: 1px solid #DDD;
 }
+.dropdown {
+    padding: 10px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+.btn {
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    padding: 5px;
+}
+.btn-view-ratings:active {
+    transform: translateY(3px);
+}

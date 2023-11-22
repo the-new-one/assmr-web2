@@ -14,6 +14,9 @@ export class DashBoardService {
         return instance.get('/admin/feedbacks');
     }
     getAllDroppedProperty() {
-        return instance.get('/admin/dropped-property')
+        return instance.get('/admin/dropped-property');
+    }
+    getAllRatings(viewType) {
+        return instance.get('/admin/get-all-ratings/'+viewType);
     }
 }
