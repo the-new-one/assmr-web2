@@ -1,6 +1,6 @@
 .card {
     border: 1px solid #DDD;
-    width: 30%;
+    width: 33.333%;
     padding: 10px;
     margin: 5px;
     flex-wrap: wrap;
@@ -29,6 +29,9 @@
     border: 1px solid #DDD;
     border-radius: 3px;
     padding: 5px;
+    text-transform: capitalize;
+    width: 100%;
+    cursor: pointer;
 }
 .btn-view-ratings:active {
     transform: translateY(3px);
