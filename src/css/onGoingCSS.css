@@ -36,3 +36,11 @@
 .btn-view-ratings:active {
     transform: translateY(3px);
 }
+.table, th, td {
+    border: 1px solid #DDD;
+    padding: 10px;
+    border-collapse: collapse;
+}
+.table {
+    width: 100%;
+}
