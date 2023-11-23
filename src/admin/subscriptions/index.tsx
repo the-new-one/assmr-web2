@@ -55,7 +55,7 @@ export const UserSubscription = () => {
                                     <p style={{marginTop: 5}}>Subscription expiry date: {formatDate(value.userSub_subscription_expiry)}</p>
                                     <p style={{marginTop: 5}}>Address: {value.user_barangay}, {value.user_province}, {value.user_municipality}</p>
                                 </div>
-                                <div style={{background: value.userSub_isSubscribed ? GOLD_COLOR : APP_COLOR, borderRadius: 100, padding: 5, marginTop: 10}}>
+                                <div style={{background: value.userSub_isSubscribed ? GOLD_COLOR : APP_COLOR, borderRadius: 100, padding: 5, marginTop: 10, textAlign: 'center'}}>
                                     {
                                         value.userSub_isSubscribed === 1 ? 'Subscriber' : 'Not subscribed'
                                     }
