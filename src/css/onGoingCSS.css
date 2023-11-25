@@ -28,12 +28,19 @@
 .btn {
     border: 1px solid #DDD;
     border-radius: 3px;
-    padding: 5px;
+    padding: 10px 12px;
     text-transform: capitalize;
     width: 100%;
     cursor: pointer;
 }
 .btn-view-ratings:active {
+    transform: translateY(3px);
+}
+.btn-filter {
+    background-color: #50C878;
+    font-weight: bold;
+}
+.btn-filter:active {
     transform: translateY(3px);
 }
 .table, th, td {
@@ -43,4 +50,18 @@
 }
 .table {
     width: 100%;
+}
+.date-container{
+    width: 30%;
+    margin-bottom: 5px;
+}
+.date-input {
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+.error-filter {
+    color: #EE4D2D;
 }

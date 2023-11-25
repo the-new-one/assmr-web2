@@ -8,6 +8,7 @@ import { OnGoingTransactions } from './admin/on-going-trnsctn';
 import { UserSubscription } from './admin/subscriptions';
 import { UserFeedBacks } from './admin/user-feedbacks';
 import { UserRatings } from './admin/user-ratings';
+import { AdminUnique } from './admin/unique';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/subscriptions" element={ <UserSubscription /> } />
             <Route path="/feedbacks" element={ <UserFeedBacks /> } />
             <Route path="/ratings" element={ <UserRatings /> } />
+            <Route path="/unique" element={ <AdminUnique /> } />
           </>
         } />
       </Routes>
