@@ -19,4 +19,7 @@ export class DashBoardService {
     getAllRatings(viewType) {
         return instance.get('/admin/get-all-ratings/'+viewType);
     }
+    getAdminUniqueRecord(dateFrom, dateTo) {
+        return instance.post('/admin/unique', {dateFrom, dateTo});
+    } // gipa add ni sir Durano
 }

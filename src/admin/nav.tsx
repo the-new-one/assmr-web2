@@ -38,6 +38,11 @@ export const AdminNavigation = () => {
             href: 'ratings',
             title: 'User Ratings'
         },
+        {
+            key: '8',
+            href: 'unique',
+            title: 'Unique'
+        },
     ]
     return <div className="app-container">
         <section className="left-nav">
@@ -45,7 +50,7 @@ export const AdminNavigation = () => {
             items={items}
         />
         </section>
-        <section style={{width: '100%', marginLeft: '250px'}}>
+        <section style={{width: '100%', marginLeft: '250px', padding: 10}}>
             <Outlet />
         </section>
     </div>
