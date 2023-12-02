@@ -46,24 +46,24 @@ export const DroppedProperty = () => {
                         {
                             value.property_type === 'jewelry' && (
                                 <>
-                                <><p>Owner: {value.info1}</p>
-                                <p>Jewelry name: {value.info2}</p>
-                                <p>Jewelry model: {value.owner}</p>
-                                <p>Karat: {value.installmentpaid}</p>
-                                <p>Grams: {value.installmentduration}</p>
-                                <p>Material: {value.delinquent}</p>
-                                <p>Delinquent: {value.info4}</p>
-                                <p>Installmentduration: {value.info5}</p>
-                                <p>Installmentpaid: {value.issue}</p>
-                                <p>Remaining months to paid: {value.monthlyPayment}</p>
-                                <p>Monthly payment: {value.info6}</p>
-                                <p>Mode of payment: {value.img}</p></>
+                                <><p style={{marginTop: 5}}>Owner: {value.info1}</p>
+                                <p style={{marginTop: 5}}>Jewelry name: {value.info2}</p>
+                                <p style={{marginTop: 5}}>Jewelry model: {value.owner}</p>
+                                <p style={{marginTop: 5}}>Karat: {value.installmentpaid}</p>
+                                <p style={{marginTop: 5}}>Grams: {value.installmentduration}</p>
+                                <p style={{marginTop: 5}}>Material: {value.delinquent}</p>
+                                <p style={{marginTop: 5}}>Delinquent: {value.info4}</p>
+                                <p style={{marginTop: 5}}>Installmentduration: {value.info5}</p>
+                                <p style={{marginTop: 5}}>Installmentpaid: {value.issue}</p>
+                                <p style={{marginTop: 5}}>Remaining months to paid: {value.monthlyPayment}</p>
+                                <p style={{marginTop: 5}}>Monthly payment: {value.info6}</p>
+                                <p style={{marginTop: 5}}>Mode of payment: {value.img}</p></>
                                 </>
                             )
                         }
                         {
                             value.property_type === 'vehicle' && (
-                                <><p>Owner: {value.owner}</p><p>Color: {value.info3}</p><p>Brand: {value.info1}</p><p>Model: {value.info2}</p><p>Milage: {value.info4}</p><p>Issue: {value.info5}</p><p>Downpayment: {value.downpayment}</p><p>Delinquent: {value.delinquent}</p><p>Installmentduration: {value.installmentduration}</p><p>Installmentpaid: {value.installmentpaid}</p><p>Monthly payment: {value.monthlyPayment}</p><p>Mode of payment: {value.modeOfPayment}</p></>
+                                <><p style={{marginTop: 5}}>Owner: {value.owner}</p><p>Color: {value.info3}</p><p style={{marginTop: 5}}>Brand: {value.info1}</p><p style={{marginTop: 5}}>Model: {value.info2}</p><p style={{marginTop: 5}}>Milage: {value.info4}</p><p style={{marginTop: 5}}>Issue: {value.info5}</p><p style={{marginTop: 5}}>Downpayment: {value.downpayment}</p><p style={{marginTop: 5}}>Delinquent: {value.delinquent}</p><p style={{marginTop: 5}}>Installmentduration: {value.installmentduration}</p><p style={{marginTop: 5}}>Installmentpaid: {value.installmentpaid}</p><p style={{marginTop: 5}}>Monthly payment: {value.monthlyPayment}</p><p>Mode of payment: {value.modeOfPayment}</p></>
                             )
                         }
                     </div>
@@ -79,4 +79,5 @@ const styleDropped: CSSProperties = {
     backgroundColor: '#f1402951',
     textTransform: 'capitalize',
     textAlign: 'center',
+    marginTop: 10,
 }
