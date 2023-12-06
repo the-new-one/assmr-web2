@@ -73,7 +73,7 @@ export const UserRatings = () => {
                                         </div> */}
                                         <p style={{margin: 5}}>Name: {toUpperCase(`${record?.lastname}, ${record?.firstname} ${record?.middlename?.length ? record?.middlename[0]: ''}.`)}</p>
                                         <p style={{margin: 5}}>Date: {formatDate(record.ratingDate)}</p>
-                                        <p style={{margin: 5}}>Website: {record.website}</p>
+                                        {/* <p style={{margin: 5}}>Website: {record.website}</p> */}
                                         <p style={{textAlign: 'center'}}>"{record.comment}"</p>
                                         <div style={{display: 'flex', justifyContent: 'center'}} >
                                         <Rating initialValue={record.ratingStar} />

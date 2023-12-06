@@ -10,6 +10,7 @@ import { UserFeedBacks } from './admin/user-feedbacks';
 import { UserRatings } from './admin/user-ratings';
 import { AdminUnique } from './admin/unique';
 import { SuccessFullyAssumed } from './admin/successfully-assumed';
+import { UserList } from './admin/user-lists';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/feedbacks" element={ <UserFeedBacks /> } />
             <Route path="/ratings" element={ <UserRatings /> } />
             <Route path="/unique" element={ <AdminUnique /> } />
+            <Route path="/user-list" element={ <UserList /> } />
           </>
         } />
       </Routes>
