@@ -1,8 +1,9 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { DashBoardService } from '../../services/dashboard-service';
 import { formatDate } from '../../utils/utilsFunct';
 import { Bar } from 'react-chartjs-2';
-
+import { PrinterOutlined } from '@ant-design/icons';
+import ReactToPrint, { useReactToPrint } from 'react-to-print'
 export const AdminUnique = () => {
     const defaultDate = new Date();
     const adminService = new DashBoardService();
@@ -11,6 +12,7 @@ export const AdminUnique = () => {
     const [invalidDateRanged, setInvalidDateRanged] = useState<boolean>(false);
     const [recordList, setRecordList] = useState<any>(undefined);
     const [resultList, setResultList] = useState<any>([]);
+    const tableRef = useRef(null);
 
     const [onError, setOnError] = useState<{
         hasError: boolean,
@@ -151,6 +153,10 @@ export const AdminUnique = () => {
             console.log(err);
         });
     }
+    const handlePrint = useReactToPrint({
+        content: () => tableRef?.current,
+    });
+
     return <div>
         <div className="date-container">
             <div style={{marginBottom: 5}}>Date From: <input className="date-input" type="date" value={dateFrom}
@@ -168,7 +174,12 @@ export const AdminUnique = () => {
                 </div>
             </div>
         }
-        <table className="table" style={{marginTop: 50}}>
+        <button style={{padding: 10, cursor: 'pointer', float: 'right', marginBottom: 10, borderColor: '#fc440f', borderRadius: 10}}
+            onClick={handlePrint}>
+        <PrinterOutlined />&nbsp;
+        Print
+        </button>
+        <table className="table" ref={tableRef}>
             <thead>
                 <tr>
                     <th>Date</th>
