@@ -2,7 +2,7 @@ import { instance } from "../utils/appUtils";
 
 export class DashBoardService {
     getAllDashboardRecrods() {
-        return instance.get('/admin/graphs')
+        return instance.get('/admin/admin')
     }
     getAllOnGoingTransactions(historyValue) {
         return instance.post('/admin/histories', { historyValue })

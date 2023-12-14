@@ -65,3 +65,28 @@
 .error-filter {
     color: #EE4D2D;
 }
+.admin-header {
+    width: 100%;
+    background-color: #ee684d;
+    height: 100px;
+    display: flex;
+}
+.admin-link {
+    display: flex;
+    flex-direction: row;
+}
+.admin-container {
+    display: 'flex';
+    flex-direction: 'row';
+    padding: 10px;
+    width: 100%;
+}
+.admin-container:hover {
+    background-color: #333;
+    cursor: pointer;
+}
+.admin-link .admin-container a{
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}

@@ -145,9 +145,9 @@ export const AdminDashboard = () => {
         return dashBoardService.getAllDashboardRecrods();
     }
     return <>
-        <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: -2}}>
             {stackedValues && 
-                <div style={{width: '50%', height: 500}}>
+                <div style={{width: '60%', height: 500}}>
                     <Bar options={optionsStackedValues} data={stackedValues} />
                 </div>
             }
@@ -156,7 +156,7 @@ export const AdminDashboard = () => {
             </div>}
             {
               propertyInfoList && 
-              <table style={{marginTop: -150}} className="table">
+              <table style={{marginTop: 20}} className="table">
                 <thead>
                   <th>Owner</th>
                   <th>Property type</th>
