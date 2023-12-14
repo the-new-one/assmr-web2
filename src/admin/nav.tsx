@@ -1,7 +1,7 @@
 // import { Anchor } from 'antd';
 import { Outlet, useLocation } from 'react-router-dom';
 import '../css/onGoingCSS.css';
-import { BarChartOutlined, CommentOutlined, DashboardOutlined, DeleteOutlined, DownOutlined, LikeOutlined, SnippetsOutlined, StarOutlined, TrophyOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { BarChartOutlined, CommentOutlined, DashboardOutlined, DeleteOutlined, DownOutlined, LikeOutlined, SnippetsOutlined, StarOutlined, StopOutlined, TrophyOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 
 export const AdminNavigation = () => {
     const params = useLocation();
@@ -20,6 +20,11 @@ export const AdminNavigation = () => {
             key: '3',
             href: 'successfull-assumed',
             title: 'Successfully Assumed Property'
+        },
+        {
+            key: '10',
+            href: 'unsuccessful-assumption',
+            title: 'Unsuccessful Assumption'
         },
         {
             key: '4',
@@ -69,6 +74,9 @@ export const AdminNavigation = () => {
                         }
                         {
                             value.title === 'Successfully Assumed Property' && <TrophyOutlined style={{marginRight: 5, fontSize: 20, color: '#dc851f'}} />
+                        }
+                        {
+                            value.title === 'Unsuccessful Assumption' && <StopOutlined style={{marginRight: 5, fontSize: 20, color: '#fc440f'}} />
                         }
                         {
                             value.title === 'Deleted Property' && <DeleteOutlined style={{marginRight: 5, fontSize: 20, color: '#e94f37'}} />

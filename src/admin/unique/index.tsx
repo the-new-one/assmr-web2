@@ -1,16 +1,20 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { DashBoardService } from '../../services/dashboard-service';
 import { formatDate } from '../../utils/utilsFunct';
 import { Bar } from 'react-chartjs-2';
-
+import { PrinterOutlined } from '@ant-design/icons';
+import ReactToPrint, { useReactToPrint } from 'react-to-print'
 export const AdminUnique = () => {
     const defaultDate = new Date();
     const adminService = new DashBoardService();
     const [dateFrom, setDateFrom] = useState<string>(`${defaultDate.getFullYear()}-${defaultDate.getMonth()+1}-${defaultDate.getDate()}`);
     const [dateTo, setDateTo] = useState<string>(`${defaultDate.getFullYear()}-${defaultDate.getMonth()+1}-${defaultDate.getDate()}`);
     const [invalidDateRanged, setInvalidDateRanged] = useState<boolean>(false);
+    const [isPrintToggled, setIsPrintToggled] = useState<boolean>(false);
+    const [reportsGeneratedDate, setReportsGeneratedDate] = useState<Date>(new Date());
     const [recordList, setRecordList] = useState<any>(undefined);
     const [resultList, setResultList] = useState<any>([]);
+    const tableRef = useRef(null);
 
     const [onError, setOnError] = useState<{
         hasError: boolean,
@@ -151,6 +155,19 @@ export const AdminUnique = () => {
             console.log(err);
         });
     }
+    const handlePrint = useReactToPrint({
+        content: () => {
+            return tableRef.current;
+        },
+        onBeforeGetContent: () => {
+            setIsPrintToggled(true);
+            return new Promise((resolve, reject) => resolve(true));
+        },
+        onAfterPrint: () => {
+            setIsPrintToggled(false);
+        }
+    });
+
     return <div>
         <div className="date-container">
             <div style={{marginBottom: 5}}>Date From: <input className="date-input" type="date" value={dateFrom}
@@ -168,37 +185,47 @@ export const AdminUnique = () => {
                 </div>
             </div>
         }
-        <table className="table" style={{marginTop: 50}}>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Posted Property</th>
-                    <th>Vehicle</th>
-                    <th>Realestate</th>
-                    <th>Jewelry</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    recordList ? recordList.map((record: any) => {
-                        let total = parseInt(record.vehicle)+parseInt(record.realestate)+parseInt(record.jewelry);
-                        return (<tr key={record.posted_date}>
-                            <td>{formatDate(record.posted_date)}</td>
-                            <td>{total}</td>
-                            <td>{record.vehicle}</td>
-                            <td>{record.realestate}</td>
-                            <td>{record.jewelry}</td>
-                        </tr>);
-                    }) :
+        <button style={{padding: 10, cursor: 'pointer', float: 'right', marginBottom: 20, borderColor: '#fc440f', borderRadius: 10}}
+            onClick={handlePrint}>
+        <PrinterOutlined />&nbsp;
+        Print
+        </button>
+        <div ref={tableRef}>
+            <div style={{marginLeft: 10}}>
+                {isPrintToggled && <p>Generated Date Reports: {reportsGeneratedDate.toUTCString()}</p>}
+            </div>
+            <table className="table">
+                <thead>
                     <tr>
-                        <td>NA</td>
-                        <td>NA</td>
-                        <td>NA</td>
-                        <td>NA</td>
-                        <td>NA</td>
+                        <th>Date</th>
+                        <th>Posted Property</th>
+                        <th>Vehicle</th>
+                        <th>Realestate</th>
+                        <th>Jewelry</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {
+                        recordList ? recordList.map((record: any) => {
+                            let total = parseInt(record.vehicle)+parseInt(record.realestate)+parseInt(record.jewelry);
+                            return (<tr key={record.posted_date}>
+                                <td>{formatDate(record.posted_date)}</td>
+                                <td>{total}</td>
+                                <td>{record.vehicle}</td>
+                                <td>{record.realestate}</td>
+                                <td>{record.jewelry}</td>
+                            </tr>);
+                        }) :
+                        <tr>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 }

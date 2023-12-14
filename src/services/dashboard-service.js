@@ -28,4 +28,7 @@ export class DashBoardService {
     getAllUserLists() {
         return instance.get('/admin/user-list');
     }
+    getAllUnsuccessfullTransactions() {
+        return instance.get('/admin/unsuccessful-transactions')
+    }
 }

@@ -11,6 +11,7 @@ import { UserRatings } from './admin/user-ratings';
 import { AdminUnique } from './admin/unique';
 import { SuccessFullyAssumed } from './admin/successfully-assumed';
 import { UserList } from './admin/user-lists';
+import { UnsuccessfullTransaction } from './admin/unsuccessful-assumption';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/dashboard" element={ <AdminDashboard /> } />
             <Route path="/on-going-transactions" element={ <OnGoingTransactions /> } />
             <Route path="//successfull-assumed" element={ <SuccessFullyAssumed /> } />
+            <Route path="/unsuccessful-assumption" element={ <UnsuccessfullTransaction /> } />
             <Route path="/dropped" element={ <DroppedProperty /> } />
             <Route path="/subscriptions" element={ <UserSubscription /> } />
             <Route path="/feedbacks" element={ <UserFeedBacks /> } />
