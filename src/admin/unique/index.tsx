@@ -10,6 +10,8 @@ export const AdminUnique = () => {
     const [dateFrom, setDateFrom] = useState<string>(`${defaultDate.getFullYear()}-${defaultDate.getMonth()+1}-${defaultDate.getDate()}`);
     const [dateTo, setDateTo] = useState<string>(`${defaultDate.getFullYear()}-${defaultDate.getMonth()+1}-${defaultDate.getDate()}`);
     const [invalidDateRanged, setInvalidDateRanged] = useState<boolean>(false);
+    const [isPrintToggled, setIsPrintToggled] = useState<boolean>(false);
+    const [reportsGeneratedDate, setReportsGeneratedDate] = useState<Date>(new Date());
     const [recordList, setRecordList] = useState<any>(undefined);
     const [resultList, setResultList] = useState<any>([]);
     const tableRef = useRef(null);
@@ -154,7 +156,16 @@ export const AdminUnique = () => {
         });
     }
     const handlePrint = useReactToPrint({
-        content: () => tableRef?.current,
+        content: () => {
+            return tableRef.current;
+        },
+        onBeforeGetContent: () => {
+            setIsPrintToggled(true);
+            return new Promise((resolve, reject) => resolve(true));
+        },
+        onAfterPrint: () => {
+            setIsPrintToggled(false);
+        }
     });
 
     return <div>
@@ -174,42 +185,47 @@ export const AdminUnique = () => {
                 </div>
             </div>
         }
-        <button style={{padding: 10, cursor: 'pointer', float: 'right', marginBottom: 10, borderColor: '#fc440f', borderRadius: 10}}
+        <button style={{padding: 10, cursor: 'pointer', float: 'right', marginBottom: 20, borderColor: '#fc440f', borderRadius: 10}}
             onClick={handlePrint}>
         <PrinterOutlined />&nbsp;
         Print
         </button>
-        <table className="table" ref={tableRef}>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Posted Property</th>
-                    <th>Vehicle</th>
-                    <th>Realestate</th>
-                    <th>Jewelry</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    recordList ? recordList.map((record: any) => {
-                        let total = parseInt(record.vehicle)+parseInt(record.realestate)+parseInt(record.jewelry);
-                        return (<tr key={record.posted_date}>
-                            <td>{formatDate(record.posted_date)}</td>
-                            <td>{total}</td>
-                            <td>{record.vehicle}</td>
-                            <td>{record.realestate}</td>
-                            <td>{record.jewelry}</td>
-                        </tr>);
-                    }) :
+        <div ref={tableRef}>
+            <div style={{marginLeft: 10}}>
+                {isPrintToggled && <p>Generated Date Reports: {reportsGeneratedDate.toUTCString()}</p>}
+            </div>
+            <table className="table">
+                <thead>
                     <tr>
-                        <td>NA</td>
-                        <td>NA</td>
-                        <td>NA</td>
-                        <td>NA</td>
-                        <td>NA</td>
+                        <th>Date</th>
+                        <th>Posted Property</th>
+                        <th>Vehicle</th>
+                        <th>Realestate</th>
+                        <th>Jewelry</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {
+                        recordList ? recordList.map((record: any) => {
+                            let total = parseInt(record.vehicle)+parseInt(record.realestate)+parseInt(record.jewelry);
+                            return (<tr key={record.posted_date}>
+                                <td>{formatDate(record.posted_date)}</td>
+                                <td>{total}</td>
+                                <td>{record.vehicle}</td>
+                                <td>{record.realestate}</td>
+                                <td>{record.jewelry}</td>
+                            </tr>);
+                        }) :
+                        <tr>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 }
