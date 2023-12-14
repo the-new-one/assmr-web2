@@ -24,7 +24,7 @@ export const SuccessFullyAssumed = () => {
     return <div style={{width: '100%', display: 'flex', justifyContent: 'space-evenly', flexWrap: 'wrap', marginTop: 10, padding: 5}}>
 
         {
-            successfullAssumption.length && successfullAssumption.map((record: any, index: number) => {
+            successfullAssumption.length ? successfullAssumption.map((record: any, index: number) => {
                  
                 return <div key={index} className="card">
                     <div className="card-body">
@@ -77,7 +77,9 @@ export const SuccessFullyAssumed = () => {
                         }
                     </div>
                 </div>
-            })
+            }) : <div className="card">
+                <p style={{textAlign: "center"}}>No records to show.</p>
+            </div>
         }
     </div>
 }

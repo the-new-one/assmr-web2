@@ -25,4 +25,7 @@ export class DashBoardService {
     getAllSuccessFullyAssumed() {
         return instance.get('/admin/successfully-assumed');
     }
+    getAllUserLists() {
+        return instance.get('/admin/user-list');
+    }
 }

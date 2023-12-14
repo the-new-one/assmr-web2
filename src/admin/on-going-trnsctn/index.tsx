@@ -56,6 +56,7 @@ export const OnGoingTransactions = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <hr />
                                 <div style={{padding: '10px'}}>
                                     <label>{toUpperCase('property information')}</label>
                                     {
