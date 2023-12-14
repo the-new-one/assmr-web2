@@ -22,4 +22,7 @@ export class DashBoardService {
     getAdminUniqueRecord(dateFrom, dateTo) {
         return instance.post('/admin/unique', {dateFrom, dateTo});
     } // gipa add ni sir Durano
+    getAllSuccessFullyAssumed() {
+        return instance.get('/admin/successfully-assumed');
+    }
 }
